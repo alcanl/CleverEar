@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.alcanl.cleverear.viewmodel.MainActivityListenersViewModel"/>
+        <variable name="viewModel" type="MainActivityListenersViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        >
+
+        <Button
+            android:id="@+id/buttonDoubleDevice"
+            android:layout_width="271dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:backgroundTint="@color/design_default_color_secondary_variant"
+            android:shadowColor="@color/ap_black"
+            android:text="@string/button_double_device_connection_text"
+            android:onClick="@{() -> viewModel.handleDoubleDeviceButton()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonSingleDevice"
+            app:layout_constraintVertical_bias="0.151" />
+
+        <Button
+            android:id="@+id/buttonSingleDevice"
+            android:layout_width="271dp"
+            android:layout_height="58dp"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:backgroundTint="@color/design_default_color_secondary_variant"
+            android:shadowColor="@color/ap_black"
+            android:text="@string/button_single_device_connection_text"
+            android:onClick="@{() -> viewModel.handleSingleDeviceButton()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="328dp"
+            android:layout_height="180dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginEnd="42dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.119"
+            app:srcCompat="@drawable/cleverear_logo" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

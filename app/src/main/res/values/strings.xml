@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">CleverEar</string>
+    <string name="splash_description_text">Splash Screen</string>
+    <string name="background_image_description_text">Logo</string>
+    <string name="button_single_device_connection_text">Connect For Single Device</string>
+    <string name="button_double_device_connection_text">Connect For Double Device</string>
+    <string name="title_activity_double_device">DoubleDeviceActivity</string>
+    <string name="title_activity_single_device">DoubleDeviceActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+</resources>
