@@ -1,15 +1,28 @@
 <resources>
     <string name="app_name">CleverEar</string>
     <string name="splash_description_text">Splash Screen</string>
-    <string name="background_image_description_text">Logo</string>
+    <string name="background_image_description_text">Ear Technic Logo</string>
+    <string name="main_logo_description_text">Ear Technic Logo</string>
     <string name="button_single_device_connection_text">Connect For Single Device</string>
     <string name="button_double_device_connection_text">Connect For Double Device</string>
     <string name="title_activity_double_device">DoubleDeviceActivity</string>
-    <string name="title_activity_single_device">DoubleDeviceActivity</string>
+    <string name="title_activity_single_device">SingleDeviceActivity</string>
+    <string name="app_version_text">v 1.0.0</string>
+    <string name="textview_detect_device_text">Detect Device</string>
+    <string name="textview_device_detection_not_found_text">Device Not Found</string>
+    <string name="textview_device_detection_device_connected_text">Connected With Device</string>
+    <string name="textview_device_detection_connection_in_process_text">Connecting To Device…</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="button_previous_activity">Previous Page</string>
+    <string name="navbar_connection_text">Connection</string>
+    <string name="navbar_control_text">Control</string>
+    <string name="navbar_advanced_text">Advanced</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alert_dialog_ear_side_select_title">Ear Side</string>
+    <string name="alert_dialog_ear_side_select_message">Please Select The Ear Side Of The Device</string>
+    <string name="alert_dialog_left_ear_side_text">Left Ear</string>
+    <string name="alert_dialog_right_ear_side_text">Right Ear</string>
 
 </resources>

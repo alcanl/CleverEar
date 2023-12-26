@@ -6,9 +6,7 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.alcanl.cleverear.databinding.ActivityMainBinding
 import com.alcanl.cleverear.viewmodel.MainActivityListenersViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var mBinding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?)

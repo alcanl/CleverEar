@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/navbar_connection_text"
+        android:icon="@drawable/connection"
+        android:id="@+id/navbar_connection"
+        />
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/navbar_control_text"
+        android:icon="@drawable/control"
+        android:id="@+id/navbar_control"/>
+    <item
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/navbar_advanced_text"
+        android:icon="@drawable/advanced"
+        android:id="@+id/navbar_advanced"/>
+</menu>

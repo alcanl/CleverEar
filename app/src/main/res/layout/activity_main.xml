@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <import type="com.alcanl.cleverear.viewmodel.MainActivityListenersViewModel"/>
         <variable name="viewModel" type="MainActivityListenersViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        >
+        android:background="@drawable/background">
 
         <Button
             android:id="@+id/buttonDoubleDevice"
@@ -20,9 +21,9 @@
             android:layout_marginStart="70dp"
             android:layout_marginEnd="70dp"
             android:backgroundTint="@color/design_default_color_secondary_variant"
+            android:onClick="@{() -> viewModel.handleDoubleDeviceButton()}"
             android:shadowColor="@color/ap_black"
             android:text="@string/button_double_device_connection_text"
-            android:onClick="@{() -> viewModel.handleDoubleDeviceButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -37,9 +38,9 @@
             android:layout_marginStart="70dp"
             android:layout_marginEnd="70dp"
             android:backgroundTint="@color/design_default_color_secondary_variant"
+            android:onClick="@{() -> viewModel.handleSingleDeviceButton()}"
             android:shadowColor="@color/ap_black"
             android:text="@string/button_single_device_connection_text"
-            android:onClick="@{() -> viewModel.handleSingleDeviceButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -47,7 +48,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageViewLogo"
             android:layout_width="328dp"
             android:layout_height="180dp"
             android:layout_marginStart="41dp"
@@ -58,7 +58,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.119"
-            app:srcCompat="@drawable/cleverear_logo" />
+            app:srcCompat="@drawable/cleverear_logo"
+            android:contentDescription="@string/main_logo_description_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="323dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/app_version_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
