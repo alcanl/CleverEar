@@ -24,5 +24,6 @@
     <string name="alert_dialog_ear_side_select_message">Please Select The Ear Side Of The Device</string>
     <string name="alert_dialog_left_ear_side_text">Left Ear</string>
     <string name="alert_dialog_right_ear_side_text">Right Ear</string>
+    <string name="toast_bluetooth_not_found_text">Your Device Does Not Support Bluetooth Connection</string>
 
 </resources>
