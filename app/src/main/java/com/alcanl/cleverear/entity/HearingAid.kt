@@ -1,6 +1,6 @@
 package com.alcanl.cleverear.entity
 
-import com.alcanl.cleverear.entity.helpers.EarSide
+import com.alcanl.cleverear.helpers.EarSide
 import com.ark.CommunicationAdaptor
 import com.ark.WirelessControl
 

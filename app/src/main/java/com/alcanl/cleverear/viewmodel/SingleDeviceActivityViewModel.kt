@@ -14,4 +14,12 @@ class SingleDeviceActivityViewModel(activity: SingleDeviceActivity) {
     {
         mWeakReference.get()?.buttonBack()
     }
+    fun handleListViewItemSelected(pos: Int)
+    {
+        mWeakReference.get()?.deviceDTOItemClicked(pos)
+    }
+    fun handleStopScanButton()
+    {
+        mWeakReference.get()?.stopScanButtonClicked()
+    }
 }

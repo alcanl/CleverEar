@@ -4,7 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <import type="com.alcanl.cleverear.viewmodel.SingleDeviceActivityViewModel"/>
+        <import type="android.widget.ArrayAdapter"/>
+        <import type="com.alcanl.cleverear.dto.BLEDeviceWrapper"/>
         <variable name="viewModel" type="SingleDeviceActivityViewModel" />
+        <variable name="adapter" type="ArrayAdapter&lt;BLEDeviceWrapper&gt;" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -45,7 +48,7 @@
             android:layout_width="70dp"
             android:layout_height="69dp"
             android:layout_marginStart="64dp"
-            android:layout_marginBottom="132dp"
+            android:layout_marginBottom="152dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/lefteargray_2" />
@@ -95,16 +98,28 @@
                 android:textSize="20sp" />
         </FrameLayout>
 
-        <TextView
-            android:layout_width="124dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="52dp"
-            android:layout_marginBottom="140dp"
-            android:gravity="center"
-            android:text="@string/textview_device_detection_not_found_text"
-            android:textSize="15sp"
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="418dp"
+            android:layout_height="126dp"
+            android:textAlignment="center"
+            android:adapter="@{adapter}"
+            android:onItemClick="@{(p, v, pos, i)-> viewModel.handleListViewItemSelected(pos)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="99dp"
+            android:layout_height="63dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="152dp"
+            android:text="Stop Scan"
+            android:onClick="@{()-> viewModel.handleStopScanButton()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
