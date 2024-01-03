@@ -5,9 +5,9 @@
     <data>
         <import type="com.alcanl.cleverear.viewmodel.SingleDeviceActivityViewModel"/>
         <import type="android.widget.ArrayAdapter"/>
-        <import type="com.alcanl.cleverear.dto.BLEDeviceWrapper"/>
+        <import type="com.alcanl.cleverear.entity.DiscoveredDevice"/>
         <variable name="viewModel" type="SingleDeviceActivityViewModel" />
-        <variable name="adapter" type="ArrayAdapter&lt;BLEDeviceWrapper&gt;" />
+        <variable name="adapter" type="ArrayAdapter&lt;String&gt;" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -48,7 +48,7 @@
             android:layout_width="70dp"
             android:layout_height="69dp"
             android:layout_marginStart="64dp"
-            android:layout_marginBottom="152dp"
+            android:layout_marginBottom="176dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/lefteargray_2" />
@@ -71,9 +71,10 @@
             android:layout_width="169dp"
             android:layout_height="201dp"
             android:layout_marginStart="121dp"
-            android:layout_marginTop="128dp"
+            android:layout_marginTop="96dp"
             android:layout_marginEnd="121dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -101,10 +102,11 @@
         <ListView
             android:id="@+id/listView"
             android:layout_width="418dp"
-            android:layout_height="126dp"
-            android:textAlignment="center"
+            android:layout_height="150dp"
             android:adapter="@{adapter}"
+            android:foregroundGravity="center"
             android:onItemClick="@{(p, v, pos, i)-> viewModel.handleListViewItemSelected(pos)}"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -113,10 +115,10 @@
             android:id="@+id/button"
             android:layout_width="99dp"
             android:layout_height="63dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginBottom="152dp"
-            android:text="Stop Scan"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="180dp"
             android:onClick="@{()-> viewModel.handleStopScanButton()}"
+            android:text="Stop Scan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
