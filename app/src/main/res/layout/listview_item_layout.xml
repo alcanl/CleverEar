@@ -10,6 +10,6 @@
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"
     app:drawableStartCompat="@drawable/baseline_rss_feed_24"
-    android:drawablePadding="5dp"
+    android:drawablePadding="0dp"
     android:gravity="center"
     />

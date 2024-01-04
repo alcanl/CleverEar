@@ -16,11 +16,11 @@ class MainActivity : AppCompatActivity() {
     }
     fun buttonSingleDeviceClick()
     {
-        Intent(this, SingleDeviceActivity::class.java).apply { startActivity(this) }
+        Intent(this, EarSideSelectionActivity::class.java).apply { startActivity(this) }
     }
     fun buttonDoubleDeviceClick()
     {
-        Intent(this, DoubleDeviceActivity::class.java).apply { startActivity(this) }
+        Intent(this, SingleDeviceActivity::class.java).apply { startActivity(this) }
     }
     private fun initBinding()
     {

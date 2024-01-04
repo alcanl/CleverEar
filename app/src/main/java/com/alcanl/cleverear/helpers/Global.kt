@@ -12,6 +12,9 @@ private const val DEVICE_MAC = 1
 private const val DEVICE_RSSI = 2
 const val MANUFACTURING_DATA = 3
 const val MANUFACTURER_CODE = "d60900ee01"
+const val EXTRA_KEY = "earSide"
+const val RIGHT = "right"
+const val LEFT = "left"
 
 @Throws(JSONException::class)
 fun parseJsonData(data: String, context: Context, earSide: EarSide): DiscoveredDevice
