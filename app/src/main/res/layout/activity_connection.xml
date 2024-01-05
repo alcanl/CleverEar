@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <import type="com.alcanl.cleverear.viewmodel.SingleDeviceActivityListenersViewModel"/>
+        <import type="com.alcanl.cleverear.viewmodel.ConnectionActivityListenersViewModel"/>
         <import type="android.widget.ArrayAdapter"/>
         <import type="com.alcanl.cleverear.entity.DiscoveredDevice"/>
-        <variable name="viewModel" type="SingleDeviceActivityListenersViewModel" />
+        <variable name="viewModel" type="ConnectionActivityListenersViewModel" />
         <variable name="adapter" type="ArrayAdapter&lt;String&gt;" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout

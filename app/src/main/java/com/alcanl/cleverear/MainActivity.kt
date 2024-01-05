@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
     fun buttonDoubleDeviceClick()
     {
-        Intent(this, SingleDeviceActivity::class.java).apply { startActivity(this) }
+        Intent(this, ConnectionActivity::class.java).apply { startActivity(this) }
     }
     private fun initBinding()
     {

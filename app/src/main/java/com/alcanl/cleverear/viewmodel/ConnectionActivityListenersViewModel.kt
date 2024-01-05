@@ -1,9 +1,9 @@
 package com.alcanl.cleverear.viewmodel
 
-import com.alcanl.cleverear.SingleDeviceActivity
+import com.alcanl.cleverear.ConnectionActivity
 import java.lang.ref.WeakReference
 
-class SingleDeviceActivityListenersViewModel(activity: SingleDeviceActivity) {
+class ConnectionActivityListenersViewModel(activity: ConnectionActivity) {
     private val mWeakReference = WeakReference(activity)
 
     fun handleDetectDeviceButton()

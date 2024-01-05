@@ -16,7 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import com.alcanl.cleverear.databinding.ActivitySingleDeviceBinding
+import com.alcanl.cleverear.databinding.ActivityConnectionBinding
 import com.alcanl.cleverear.entity.DiscoveredDevice
 import com.alcanl.cleverear.entity.HearingAid
 import com.alcanl.cleverear.helpers.EXTRA_KEY
@@ -26,11 +26,11 @@ import com.alcanl.cleverear.helpers.MANUFACTURER_CODE
 import com.alcanl.cleverear.helpers.parseJsonData
 import com.alcanl.cleverear.sdk.events.ConnectionStateChangedEvent
 import com.alcanl.cleverear.sdk.events.ScanEvent
-import com.alcanl.cleverear.viewmodel.SingleDeviceActivityListenersViewModel
+import com.alcanl.cleverear.viewmodel.ConnectionActivityListenersViewModel
 import com.ark.ArkException
 import com.ark.AsyncResult
-import com.ark.CommunicationAdaptor
 import com.ark.CommunicationPort
+import com.ark.EventHandler
 import com.ark.EventType
 import com.ark.ProductManager
 import com.ark.WirelessProgrammerType
@@ -39,19 +39,22 @@ import javax.inject.Inject
 import kotlin.concurrent.thread
 
 @AndroidEntryPoint
-class SingleDeviceActivity : AppCompatActivity() {
-    private lateinit var mBinding: ActivitySingleDeviceBinding
+class ConnectionActivity : AppCompatActivity() {
+    private lateinit var mBinding: ActivityConnectionBinding
     @Inject
     lateinit var mProductManager : ProductManager
+    @Inject
+    lateinit var mEventHandler: EventHandler
     @Volatile
     private var isDeviceFound = false
     private var mDeviceCount = 0
-    private lateinit var asyncResult : AsyncResult
     private var mIsConnected = false
     private var mBluetoothPermission = false
-    private lateinit var mEarSide : EarSide
     private val bleDeviceList = ArrayList<DiscoveredDevice>()
+    private lateinit var mEarSide : EarSide
+    private lateinit var asyncResult : AsyncResult
     private lateinit var mSelectedHearingAid : HearingAid
+
     private var mBluetoothPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission())
 
 
@@ -94,8 +97,8 @@ class SingleDeviceActivity : AppCompatActivity() {
     }
     private fun initBinding()
     {
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_single_device)
-        mBinding.viewModel = SingleDeviceActivityListenersViewModel(this)
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_connection)
+        mBinding.viewModel = ConnectionActivityListenersViewModel(this)
         mBinding.adapter = ArrayAdapter(this, R.layout.listview_item_layout, ArrayList<String>(emptyList()))
     }
     private fun getEarSideSelection()
@@ -168,9 +171,7 @@ class SingleDeviceActivity : AppCompatActivity() {
     }
     fun deviceDTOItemClicked(pos: Int)
     {
-        isDeviceFound = true
-        mBinding.textViewDeviceState.text = getText(R.string.textview_device_detection_connection_in_process_text)
-
+        stopScanButtonClicked()
 
         val device = mBinding.adapter!!.getItem(pos)
         val selectedDevice = bleDeviceList.find { it.name == device.toString() }
@@ -182,7 +183,7 @@ class SingleDeviceActivity : AppCompatActivity() {
             )
 
            val test = mProductManager.createWirelessCommunicationInterface(selectedDevice.address)
-
+            test.setEventHandler(mEventHandler)
             test.connect()
 
         }
@@ -195,10 +196,11 @@ class SingleDeviceActivity : AppCompatActivity() {
     private fun scanDevices()
     {
         bleDeviceList.clear()
+
         try {
-            thread(isDaemon = true, start = true) {
+            thread(isDaemon = false, start = true) {
                 while (true) {
-                    val event = mProductManager.eventHandler.event
+                    val event = mEventHandler.event
                     if (event.type == EventType.kScanEvent) {
                         Log.e(ScanEvent::class.java.simpleName, event.data)
                         val device = parseJsonData(
@@ -218,8 +220,11 @@ class SingleDeviceActivity : AppCompatActivity() {
                             }
                         }
                     }
-                    if (event.type == EventType.kConnectionEvent)
+                    if (event.type == EventType.kConnectionEvent) {
+                        Log.e("event", event.type.name)
+                        Log.e("event", event.data)
                         Log.e(ConnectionStateChangedEvent::class.java.simpleName, event.data)
+                    }
                 }
             }
         } catch (_ : IndexOutOfBoundsException)
@@ -234,6 +239,5 @@ class SingleDeviceActivity : AppCompatActivity() {
         mBinding.imageButtonDetect.isEnabled = true
         mBinding.progressBar.visibility = View.GONE
         mBinding.frameLayoutStopScan.visibility = View.INVISIBLE
-
     }
 }

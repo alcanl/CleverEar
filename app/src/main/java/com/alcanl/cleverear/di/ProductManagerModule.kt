@@ -1,5 +1,6 @@
 package com.alcanl.cleverear.di
 
+import com.ark.EventHandler
 import com.ark.ProductManager
 import dagger.Module
 import dagger.Provides
@@ -10,7 +11,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ProductManagerModule {
+    private val mProductManager = ProductManager.getInstance()
     @Provides
     @Singleton
-    fun createProductManager() : ProductManager = ProductManager.getInstance()
+    fun createProductManager() : ProductManager = mProductManager
+    @Provides
+    @Singleton
+    fun createEventHandler() : EventHandler = mProductManager.eventHandler
 }

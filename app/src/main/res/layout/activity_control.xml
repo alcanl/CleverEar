@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="com.alcanl.cleverear.viewmodel.ControlActivityListenersViewModel"/>
+        <variable name="viewModel" type="ControlActivityListenersViewModel" />
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ControlActivity"
+    android:background="@drawable/background">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderLeft"
+            android:layout_width="292dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="142dp"
+            android:layout_marginEnd="-25dp"
+            android:rotation="270"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewVolume"
+            android:value="20.0"
+            android:valueFrom="0.0"
+            android:valueTo="100.0"
+            app:thumbColor="@color/design_default_color_secondary_variant"
+            app:trackColor="#A8A3A3"
+            app:thumbRadius="16dp"
+            app:trackHeight="12dp" />
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="87dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="5dp"
+            android:contentDescription="@string/main_logo_description_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cleverear_logo_opacity" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/sliderRight"
+            android:layout_width="292dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="-35dp"
+            android:layout_marginTop="142dp"
+            android:rotation="270"
+            app:trackColor="#A8A3A3"
+            app:thumbColor="@color/design_default_color_secondary_variant"
+            android:value="20.0"
+            android:valueFrom="0.0"
+            android:valueTo="100.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewVolume"
+            app:thumbRadius="16dp"
+            app:trackHeight="12dp" />
+
+        <TextView
+            android:id="@+id/textViewVolume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="95dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/textview_volume_text"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewLeftSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="76dp"
+            android:layout_marginTop="140dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/textview_left_device_text"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sliderRight" />
+
+        <TextView
+            android:id="@+id/textViewRightSeekBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="80dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/textview_right_device_text"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sliderLeft" />
+
+        <TextView
+            android:id="@+id/textViewPrograms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="177dp"
+            android:layout_marginEnd="177dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/textview_program_text"
+            android:textColor="@color/design_default_color_secondary_variant"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TableLayout
+            style="?android:attr/buttonBarStyle"
+            android:id="@+id/tableLayout"
+            android:layout_width="409dp"
+            android:layout_height="214dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TableRow android:padding="10dp">
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonOneClick()}"
+                    android:text="@string/button_text_one"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonTwoClick()}"
+                    android:text="@string/button_text_two"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonThreeClick()}"
+                    android:text="@string/button_text_three"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonFourClick()}"
+                    android:text="@string/button_text_four"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+            </TableRow>
+
+            <TableRow android:padding="10dp">
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonFiveClick()}"
+                    android:text="@string/button_text_five"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonSixClick()}"
+                    android:text="@string/button_text_six"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonSevenClick()}"
+                    android:text="@string/button_text_seven"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+
+                <Button
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#A8A3A3"
+                    android:onClick="@{()-> viewModel.handleButtonEightClick()}"
+                    android:text="@string/button_text_eight"
+                    android:textColor="@color/ap_black"
+                    android:textSize="24sp"
+                    app:cornerRadius="50dp" />
+            </TableRow>
+
+
+        </TableLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switchDoubleDeviceConf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="161dp"
+            android:layout_marginTop="360dp"
+            android:layout_marginEnd="161dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/switch_dual_device_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewVolume" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/design_default_color_secondary_variant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

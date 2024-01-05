@@ -14,6 +14,19 @@
     <string name="textview_device_detection_connection_in_process_text">Connecting To Device…</string>
     <string name="textview_count_device_found_text">Device Found</string>
     <string name="button_stop_scan_text">\t\t\tStop Scanning</string>
+    <string name="textview_volume_text">Volume</string>
+    <string name="textview_program_text">Programs</string>
+    <string name="textview_left_device_text">Left Device</string>
+    <string name="textview_right_device_text">Right Device</string>
+    <string name="switch_dual_device_text">Dual Device</string>
+    <string name="button_text_one">1</string>
+    <string name="button_text_two">2</string>
+    <string name="button_text_three">3</string>
+    <string name="button_text_four">4</string>
+    <string name="button_text_five">5</string>
+    <string name="button_text_six">6</string>
+    <string name="button_text_seven">7</string>
+    <string name="button_text_eight">8</string>
     <!-- Strings used for fragments for navigation -->
     <string name="next">Next</string>
     <string name="button_previous_activity">Previous Page</string>
@@ -85,9 +98,9 @@
         <item>Connected</item>
         <item>ErrorState</item>
     </string-array>
-    <string name="connectionStatus_Disconnecting">Disconnecting...</string>
+    <string name="connectionStatus_Disconnecting">Disconnecting…</string>
     <string name="connectionStatus_Disconnected">Disconnected</string>
-    <string name="connectionStatus_Connecting">Connecting...</string>
+    <string name="connectionStatus_Connecting">Connecting…</string>
     <string name="connectionStatus_Connected">Connected</string>
     <string name="connectionStatus_ErrorState">ErrorState.</string>
     <string name="left_ha_manu_data" translatable="false">ha_l_manu_data</string>

@@ -1,8 +1,6 @@
 package com.alcanl.cleverear
 
 import android.content.Intent
-import android.os.Build.VERSION
-import android.os.Build.VERSION_CODES
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -26,13 +24,13 @@ class EarSideSelectionActivity : AppCompatActivity() {
     }
     fun leftEarButtonClicked()
     {
-        Intent().putExtra(EXTRA_KEY, LEFT).also { Intent(this, SingleDeviceActivity::class.java)
+        Intent().putExtra(EXTRA_KEY, LEFT).also { Intent(this, ConnectionActivity::class.java)
             .apply { startActivity(this) } }
 
     }
     fun rightEarButtonClicked()
     {
-        Intent().putExtra(EXTRA_KEY, RIGHT).also { Intent(this, SingleDeviceActivity::class.java)
+        Intent().putExtra(EXTRA_KEY, RIGHT).also { Intent(this, ConnectionActivity::class.java)
             .apply { startActivity(this) } }
     }
 
