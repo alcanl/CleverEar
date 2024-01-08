@@ -13,14 +13,16 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import com.alcanl.cleverear.databinding.ActivityConnectionBinding
 import com.alcanl.cleverear.entity.DiscoveredDevice
 import com.alcanl.cleverear.entity.HearingAid
-import com.alcanl.cleverear.helpers.EXTRA_KEY
+import com.alcanl.cleverear.helpers.BUNDLE_EAR_SIDE_KEY
 import com.alcanl.cleverear.helpers.EarSide
+import com.alcanl.cleverear.helpers.HEARING_AID
 import com.alcanl.cleverear.helpers.LEFT
 import com.alcanl.cleverear.helpers.MANUFACTURER_CODE
 import com.alcanl.cleverear.helpers.parseJsonData
@@ -104,7 +106,7 @@ class ConnectionActivity : AppCompatActivity() {
     private fun getEarSideSelection()
     {
         mEarSide = when {
-            intent.getStringExtra(EXTRA_KEY) == LEFT -> EarSide.Left
+            intent.getStringExtra(BUNDLE_EAR_SIDE_KEY) == LEFT -> EarSide.Left
             else -> EarSide.Right
         }
     }
@@ -171,22 +173,34 @@ class ConnectionActivity : AppCompatActivity() {
     }
     fun deviceDTOItemClicked(pos: Int)
     {
-        stopScanButtonClicked()
+
 
         val device = mBinding.adapter!!.getItem(pos)
         val selectedDevice = bleDeviceList.find { it.name == device.toString() }
 
         if (selectedDevice != null) {
             mSelectedHearingAid = HearingAid(
-                selectedDevice.name, selectedDevice.address, selectedDevice.rssi,
+                selectedDevice.address, selectedDevice.name, selectedDevice.rssi,
                 selectedDevice.manufacturerData, mEarSide
             )
 
-           val test = mProductManager.createWirelessCommunicationInterface(selectedDevice.address)
-            test.setEventHandler(mEventHandler)
-            test.connect()
+            val bundle = Bundle()
+            bundle.putSerializable(HEARING_AID, mSelectedHearingAid)
+            isDeviceFound = true
 
+            Intent(this, ControlActivity::class.java).apply {
+                putExtras(bundle)
+                setResult(RESULT_OK, this)
+                startActivity(this)
+            }
+            stopScanButtonClicked()
         }
+        else
+            AlertDialog.Builder(this).setMessage(R.string.alert_dialog_connection_problem_message)
+                .setTitle(R.string.alert_dialog_connection_problem_title)
+                .setCancelable(false)
+                .setPositiveButton(R.string.alert_dialog_connection_problem_ok_button) {_,_ -> }
+                .create().show()
 
     }
     fun buttonBack()
@@ -196,17 +210,17 @@ class ConnectionActivity : AppCompatActivity() {
     private fun scanDevices()
     {
         bleDeviceList.clear()
+        mBinding.adapter!!.notifyDataSetChanged()
 
         try {
             thread(isDaemon = false, start = true) {
-                while (true) {
+                while (!isDeviceFound) {
                     val event = mEventHandler.event
                     if (event.type == EventType.kScanEvent) {
                         Log.e(ScanEvent::class.java.simpleName, event.data)
                         val device = parseJsonData(
                             event.data,
-                            this,
-                            if (mEarSide == EarSide.Left) EarSide.Left else EarSide.Right
+                            this
                         )
                         bleDeviceList.add(device)
                         Log.e(String::class.java.simpleName, bleDeviceList.size.toString())
@@ -220,11 +234,6 @@ class ConnectionActivity : AppCompatActivity() {
                             }
                         }
                     }
-                    if (event.type == EventType.kConnectionEvent) {
-                        Log.e("event", event.type.name)
-                        Log.e("event", event.data)
-                        Log.e(ConnectionStateChangedEvent::class.java.simpleName, event.data)
-                    }
                 }
             }
         } catch (_ : IndexOutOfBoundsException)
@@ -235,7 +244,6 @@ class ConnectionActivity : AppCompatActivity() {
     fun stopScanButtonClicked()
     {
         mProductManager.endScanForWirelessDevices(asyncResult)
-        isDeviceFound = true
         mBinding.imageButtonDetect.isEnabled = true
         mBinding.progressBar.visibility = View.GONE
         mBinding.frameLayoutStopScan.visibility = View.INVISIBLE

@@ -144,5 +144,8 @@
     <string name="alert_disconnect_message">Do you want to disconnect from </string>
     <string name="alert_remove_device">Remove Device</string>
     <string name="alert_remove_message">Are you sure you want to remove !</string>
+    <string name="alert_dialog_connection_problem_message" translatable="true">Some unknown problems occurred while connecting the device, please retry to connection!</string>
+    <string name="alert_dialog_connection_problem_title" translatable="true">Warning</string>
+    <string name="alert_dialog_connection_problem_ok_button" translatable="true">OK</string>
 
 </resources>

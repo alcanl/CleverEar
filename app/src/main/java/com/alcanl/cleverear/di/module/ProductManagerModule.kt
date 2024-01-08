@@ -1,4 +1,5 @@
-package com.alcanl.cleverear.di
+package com.alcanl.cleverear.di.module
+
 
 import com.ark.EventHandler
 import com.ark.ProductManager

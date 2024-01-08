@@ -6,7 +6,11 @@
 
     <data>
         <import type="com.alcanl.cleverear.viewmodel.ControlActivityListenersViewModel"/>
+        <import type="com.alcanl.cleverear.entity.HearingAid"/>
+        <import type="com.alcanl.cleverear.helpers.EarSide"/>
+        <variable name="hearingAid" type="HearingAid" />
         <variable name="viewModel" type="ControlActivityListenersViewModel" />
+        <variable name="isDualDevice" type="boolean" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -25,22 +29,111 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sliderLeft"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="142dp"
-            android:layout_marginEnd="-25dp"
-            android:rotation="270"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="1dp"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVolume"
-            android:value="20.0"
-            android:valueFrom="0.0"
-            android:valueTo="100.0"
-            app:thumbColor="@color/design_default_color_secondary_variant"
-            app:trackColor="#A8A3A3"
-            app:thumbRadius="16dp"
-            app:trackHeight="12dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewPrograms"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewVolume">
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchDualConfiguration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="148dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginEnd="151dp"
+                android:layout_marginBottom="22dp"
+                android:checked="@={isDualDevice}"
+                android:fontFamily="sans-serif-medium"
+                android:onCheckedChanged="@{()-> viewModel.handleSwitchCheckedChange()}"
+                android:text="@string/switch_dual_device_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewRightSeekBar" />
+
+            <TextView
+                android:id="@+id/textViewRightSeekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="123dp"
+                android:layout_marginEnd="84dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/textview_right_device_text"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sliderRight" />
+
+            <TextView
+                android:id="@+id/textViewLeftSeekBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="86dp"
+                android:layout_marginTop="123dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/textview_left_device_text"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sliderRight" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderRight"
+                android:layout_width="292dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-25dp"
+                android:layout_marginTop="144dp"
+                android:layout_marginBottom="123dp"
+                android:enabled="@{hearingAid.component5() == EarSide.Right}"
+                android:rotation="270"
+                android:value="20.0"
+                android:valueFrom="0.0"
+                android:valueTo="100.0"
+                app:layout_constraintBottom_toTopOf="@+id/textViewRightSeekBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:onValueChangeListener="@{(value) -> viewModel.handleRightEarSliderValueChange(value)}"
+                app:thumbColor="@color/design_default_color_secondary_variant"
+                app:thumbRadius="16dp"
+                app:trackColor="#A8A3A3"
+                app:trackHeight="12dp" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderLeft"
+                android:layout_width="292dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="144dp"
+                android:layout_marginEnd="-25dp"
+                android:layout_marginBottom="123dp"
+                android:enabled="@{hearingAid.component5() == EarSide.Left}"
+                android:rotation="270"
+                android:value="20.0"
+                android:valueFrom="0.0"
+                android:valueTo="100.0"
+                app:layout_constraintBottom_toTopOf="@+id/textViewRightSeekBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:onValueChangeListener="@{(value) -> viewModel.handleLeftEarSliderValueChange(value)}"
+                app:thumbColor="@color/design_default_color_secondary_variant"
+                app:thumbRadius="16dp"
+                app:trackColor="#A8A3A3"
+                app:trackHeight="12dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/imageViewLogo"
@@ -53,23 +146,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cleverear_logo_opacity" />
 
-        <com.google.android.material.slider.Slider
-            android:id="@+id/sliderRight"
-            android:layout_width="292dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="-35dp"
-            android:layout_marginTop="142dp"
-            android:rotation="270"
-            app:trackColor="#A8A3A3"
-            app:thumbColor="@color/design_default_color_secondary_variant"
-            android:value="20.0"
-            android:valueFrom="0.0"
-            android:valueTo="100.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVolume"
-            app:thumbRadius="16dp"
-            app:trackHeight="12dp" />
-
         <TextView
             android:id="@+id/textViewVolume"
             android:layout_width="wrap_content"
@@ -79,33 +155,10 @@
             android:text="@string/textview_volume_text"
             android:textColor="@color/design_default_color_secondary_variant"
             android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewLeftSeekBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
-            android:layout_marginTop="140dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/textview_left_device_text"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sliderRight" />
-
-        <TextView
-            android:id="@+id/textViewRightSeekBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
-            android:layout_marginEnd="80dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/textview_right_device_text"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/sliderLeft" />
 
         <TextView
             android:id="@+id/textViewPrograms"
@@ -119,7 +172,8 @@
             android:textSize="28sp"
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <TableLayout
             style="?android:attr/buttonBarStyle"
@@ -139,6 +193,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonOneClick()}"
                     android:text="@string/button_text_one"
                     android:textColor="@color/ap_black"
@@ -152,6 +207,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonTwoClick()}"
                     android:text="@string/button_text_two"
                     android:textColor="@color/ap_black"
@@ -165,6 +221,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonThreeClick()}"
                     android:text="@string/button_text_three"
                     android:textColor="@color/ap_black"
@@ -178,6 +235,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonFourClick()}"
                     android:text="@string/button_text_four"
                     android:textColor="@color/ap_black"
@@ -194,6 +252,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonFiveClick()}"
                     android:text="@string/button_text_five"
                     android:textColor="@color/ap_black"
@@ -207,6 +266,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonSixClick()}"
                     android:text="@string/button_text_six"
                     android:textColor="@color/ap_black"
@@ -220,6 +280,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonSevenClick()}"
                     android:text="@string/button_text_seven"
                     android:textColor="@color/ap_black"
@@ -233,6 +294,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:backgroundTint="#A8A3A3"
+                    android:enabled="false"
                     android:onClick="@{()-> viewModel.handleButtonEightClick()}"
                     android:text="@string/button_text_eight"
                     android:textColor="@color/ap_black"
@@ -242,19 +304,6 @@
 
 
         </TableLayout>
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/switchDoubleDeviceConf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="161dp"
-            android:layout_marginTop="360dp"
-            android:layout_marginEnd="161dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/switch_dual_device_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVolume" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

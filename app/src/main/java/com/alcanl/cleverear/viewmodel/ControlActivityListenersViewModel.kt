@@ -38,4 +38,16 @@ class ControlActivityListenersViewModel(activity: ControlActivity) {
     {
         mWeakReference.get()?.buttonEightClicked()
     }
+    fun handleLeftEarSliderValueChange(value: Float)
+    {
+        mWeakReference.get()?.sliderLeftEarOnValueChanged(value)
+    }
+    fun handleRightEarSliderValueChange(value: Float)
+    {
+        mWeakReference.get()?.sliderRightEarOnValueChanged(value)
+    }
+    fun handleSwitchCheckedChange()
+    {
+        mWeakReference.get()?.switchOnCheckedChanged()
+    }
 }

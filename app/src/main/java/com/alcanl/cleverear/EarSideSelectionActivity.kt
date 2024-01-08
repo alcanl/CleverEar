@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.alcanl.cleverear.databinding.ActivityEarSideSelectionBinding
-import com.alcanl.cleverear.helpers.EXTRA_KEY
+import com.alcanl.cleverear.helpers.BUNDLE_EAR_SIDE_KEY
 import com.alcanl.cleverear.helpers.LEFT
 import com.alcanl.cleverear.helpers.RIGHT
 import com.alcanl.cleverear.viewmodel.EarSideSelectionActivityListenersViewModel
@@ -24,14 +24,18 @@ class EarSideSelectionActivity : AppCompatActivity() {
     }
     fun leftEarButtonClicked()
     {
-        Intent().putExtra(EXTRA_KEY, LEFT).also { Intent(this, ConnectionActivity::class.java)
-            .apply { startActivity(this) } }
-
+        Intent(this, ConnectionActivity::class.java).apply {
+            putExtra(BUNDLE_EAR_SIDE_KEY, LEFT)
+            setResult(RESULT_OK, this)
+            startActivity(this)
+        }
     }
     fun rightEarButtonClicked()
     {
-        Intent().putExtra(EXTRA_KEY, RIGHT).also { Intent(this, ConnectionActivity::class.java)
-            .apply { startActivity(this) } }
+        Intent(this, ConnectionActivity::class.java).apply {
+            putExtra(BUNDLE_EAR_SIDE_KEY, RIGHT)
+            setResult(RESULT_OK, this)
+            startActivity(this)
+        }
     }
-
 }
