@@ -18,7 +18,7 @@ const val LEFT = "left"
 const val HEARING_AID = "selected_device"
 
 @Throws(JSONException::class)
-fun parseJsonData(data: String, context: Context): DiscoveredDevice
+fun parseJsonScanData(data: String, context: Context): DiscoveredDevice
 {
     val jsonObject = JSONObject(data)
     val scanEvent = jsonObject.getJSONArray(getString(context, R.string.event_json_obj))
@@ -33,4 +33,11 @@ fun parseJsonData(data: String, context: Context): DiscoveredDevice
         deviceRSSI.getInt(getString(context, R.string.device_rssi_json)),
         manufacturingData.getString(getString(context, R.string.device_manu_data_json))
     )
+}
+@Throws(JSONException::class)
+fun parseJsonConnectionData(data: String, context: Context) : Int
+{
+    val jsonObject = JSONObject(data)
+    val connectionEvent = jsonObject.getJSONArray(getString(context, R.string.event_json_obj))
+    return connectionEvent.getJSONObject(1).getInt(getString(context, R.string.device_connection_state_json))
 }

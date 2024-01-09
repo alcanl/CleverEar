@@ -100,7 +100,7 @@
     </string-array>
     <string name="connectionStatus_Disconnecting">Disconnecting…</string>
     <string name="connectionStatus_Disconnected">Disconnected</string>
-    <string name="connectionStatus_Connecting">Connecting…</string>
+    <string name="connectionStatus_Connecting">Connecting</string>
     <string name="connectionStatus_Connected">Connected</string>
     <string name="connectionStatus_ErrorState">ErrorState.</string>
     <string name="left_ha_manu_data" translatable="false">ha_l_manu_data</string>
@@ -112,6 +112,7 @@
     <string name="title_activity_scan">Scanning....</string>
     <string name="title_activity_coble2">Advanced</string>
     <string name="device_name_json" translatable="false">DeviceName</string>
+    <string name="device_connection_state_json" translatable="false">ConnectionState</string>
     <string name="device_id_json" translatable="false">DeviceID</string>
     <string name="device_rssi_json" translatable="false">RSSI</string>
     <string name="HA_SIDE" translatable="false">HA_Side</string>

@@ -25,8 +25,7 @@ import com.alcanl.cleverear.helpers.EarSide
 import com.alcanl.cleverear.helpers.HEARING_AID
 import com.alcanl.cleverear.helpers.LEFT
 import com.alcanl.cleverear.helpers.MANUFACTURER_CODE
-import com.alcanl.cleverear.helpers.parseJsonData
-import com.alcanl.cleverear.sdk.events.ConnectionStateChangedEvent
+import com.alcanl.cleverear.helpers.parseJsonScanData
 import com.alcanl.cleverear.sdk.events.ScanEvent
 import com.alcanl.cleverear.viewmodel.ConnectionActivityListenersViewModel
 import com.ark.ArkException
@@ -218,7 +217,7 @@ class ConnectionActivity : AppCompatActivity() {
                     val event = mEventHandler.event
                     if (event.type == EventType.kScanEvent) {
                         Log.e(ScanEvent::class.java.simpleName, event.data)
-                        val device = parseJsonData(
+                        val device = parseJsonScanData(
                             event.data,
                             this
                         )

@@ -30,50 +30,40 @@
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="1dp"
-            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/textViewPrograms"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewVolume">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switchDualConfiguration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="148dp"
-                android:layout_marginTop="21dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="151dp"
-                android:layout_marginBottom="22dp"
+                android:layout_marginBottom="24dp"
                 android:checked="@={isDualDevice}"
                 android:fontFamily="sans-serif-medium"
                 android:onCheckedChanged="@{()-> viewModel.handleSwitchCheckedChange()}"
                 android:text="@string/switch_dual_device_text"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/textViewPrograms"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewRightSeekBar" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewRightSeekBar"
+                app:thumbTint="@drawable/switch_theme" />
 
             <TextView
                 android:id="@+id/textViewRightSeekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="123dp"
-                android:layout_marginEnd="84dp"
+                android:layout_marginEnd="66dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/textview_right_device_text"
                 android:textColor="@color/black"
@@ -84,7 +74,7 @@
                 android:id="@+id/textViewLeftSeekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="86dp"
+                android:layout_marginStart="70dp"
                 android:layout_marginTop="123dp"
                 android:fontFamily="sans-serif-medium"
                 android:text="@string/textview_left_device_text"
@@ -93,32 +83,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/sliderRight" />
 
             <com.google.android.material.slider.Slider
-                android:id="@+id/sliderRight"
-                android:layout_width="292dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-25dp"
-                android:layout_marginTop="144dp"
-                android:layout_marginBottom="123dp"
-                android:enabled="@{hearingAid.component5() == EarSide.Right}"
-                android:rotation="270"
-                android:value="20.0"
-                android:valueFrom="0.0"
-                android:valueTo="100.0"
-                app:layout_constraintBottom_toTopOf="@+id/textViewRightSeekBar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:onValueChangeListener="@{(value) -> viewModel.handleRightEarSliderValueChange(value)}"
-                app:thumbColor="@color/design_default_color_secondary_variant"
-                app:thumbRadius="16dp"
-                app:trackColor="#A8A3A3"
-                app:trackHeight="12dp" />
-
-            <com.google.android.material.slider.Slider
                 android:id="@+id/sliderLeft"
                 android:layout_width="292dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="144dp"
-                android:layout_marginEnd="-25dp"
+                android:layout_marginStart="-40dp"
+                android:layout_marginTop="130dp"
                 android:layout_marginBottom="123dp"
                 android:enabled="@{hearingAid.component5() == EarSide.Left}"
                 android:rotation="270"
@@ -126,13 +95,65 @@
                 android:valueFrom="0.0"
                 android:valueTo="100.0"
                 app:layout_constraintBottom_toTopOf="@+id/textViewRightSeekBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewVolume"
                 app:onValueChangeListener="@{(value) -> viewModel.handleLeftEarSliderValueChange(value)}"
                 app:thumbColor="@color/design_default_color_secondary_variant"
+                app:thumbStrokeColor="@color/design_default_color_secondary_variant"
                 app:thumbRadius="16dp"
                 app:trackColor="#A8A3A3"
                 app:trackHeight="12dp" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/sliderRight"
+                android:layout_width="292dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="130dp"
+                android:layout_marginEnd="-40dp"
+                android:layout_marginBottom="123dp"
+                android:enabled="@{hearingAid.component5() == EarSide.Right}"
+                android:rotation="270"
+                android:value="20.0"
+                android:valueFrom="0.0"
+                android:valueTo="100.0"
+                app:layout_constraintBottom_toTopOf="@+id/textViewRightSeekBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewVolume"
+                app:onValueChangeListener="@{(value) -> viewModel.handleRightEarSliderValueChange(value)}"
+                app:thumbColor="@color/design_default_color_secondary_variant"
+                app:thumbStrokeColor="@color/design_default_color_secondary_variant"
+                app:thumbRadius="16dp"
+                app:trackColor="#A8A3A3"
+                app:trackHeight="12dp" />
+
+            <TextView
+                android:id="@+id/textViewPrograms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="144dp"
+                android:layout_marginEnd="144dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/textview_program_text"
+                android:textColor="@color/design_default_color_secondary_variant"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="60dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/textview_volume_text"
+                android:textColor="@color/design_default_color_secondary_variant"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -146,45 +167,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/cleverear_logo_opacity" />
 
-        <TextView
-            android:id="@+id/textViewVolume"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="95dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/textview_volume_text"
-            android:textColor="@color/design_default_color_secondary_variant"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewPrograms"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="177dp"
-            android:layout_marginEnd="177dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/textview_program_text"
-            android:textColor="@color/design_default_color_secondary_variant"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
         <TableLayout
-            style="?android:attr/buttonBarStyle"
             android:id="@+id/tableLayout"
-            android:layout_width="409dp"
-            android:layout_height="214dp"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="35dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/table_layout_border"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-            <TableRow android:padding="10dp">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
                 <Button
                     style="?android:attr/buttonBarButtonStyle"
@@ -243,7 +242,10 @@
                     app:cornerRadius="50dp" />
             </TableRow>
 
-            <TableRow android:padding="10dp">
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
                 <Button
                     style="?android:attr/buttonBarButtonStyle"
@@ -310,12 +312,34 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:background="@color/design_default_color_secondary_variant"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         app:menu="@menu/bottom_nav_menu" />
+
+    <FrameLayout
+        android:id="@+id/frameLayoutLoading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F1EAEA"
+        android:backgroundTint="#C4F3EEEE"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="89dp"
+            android:layout_height="82dp"
+            android:indeterminateTint="@color/design_default_color_secondary_variant"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
